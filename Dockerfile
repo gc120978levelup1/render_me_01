@@ -24,10 +24,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
 
 # -----------------------------------------------------------------------------------------------------------
-# Own and Modify html folder
-RUN chown -R root:root /var/www/html
-RUN chmod -R 777 /var/www/html
-
 # Copy the application code
 # Copy all the web app code to the linux Apache html folder
 COPY . /var/www/html
@@ -46,12 +42,14 @@ RUN php artisan storage:link
 # copy apache settings for Laravel Hosting
 COPY 000-default.conf /etc/apache2/sites-enabled/
 
-# UNCOMMENT CODE BELOW DURING PRODUCTION DEPLOYMENT
-RUN php artisan migrate --force
+# uncomment during production
 RUN echo "Listen 0.0.0.0:80" >> /etc/apache2/apache2.conf
+RUN php artisan migrate --force
 
 # Enable Apache Web Service
 RUN a2enmod rewrite
 RUN apachectl restart
+RUN chown -R root:root /var/www/html
+RUN chmod -R 777 /var/www/html
 
 EXPOSE 80
