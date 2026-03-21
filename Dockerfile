@@ -47,8 +47,8 @@ RUN php artisan storage:link
 COPY 000-default.conf /etc/apache2/sites-enabled/
 
 # UNCOMMENT CODE BELOW DURING PRODUCTION DEPLOYMENT
-# RUN php artisan migrate --force
-# RUN echo "Listen 0.0.0.0:80" >> /etc/apache2/apache2.conf
+RUN php artisan migrate --force
+RUN echo "Listen 0.0.0.0:80" >> /etc/apache2/apache2.conf
 
 # Enable Apache Web Service
 RUN a2enmod rewrite
