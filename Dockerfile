@@ -49,7 +49,7 @@ RUN php artisan migrate --force
 # Enable Apache Web Service
 RUN a2enmod rewrite
 RUN apachectl restart
-RUN chown -R root:root /var/www/html
-RUN chmod -R 777 /var/www/html
+RUN chown -R root:root storage bootstrap/cache
+RUN chmod -R 777 storage bootstrap/cache
 
-EXPOSE 80
+EXPOSE 80 445
