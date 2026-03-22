@@ -12,7 +12,6 @@ export default defineConfig({
             input: ['resources/js/app.ts'],
             refresh: true,
         }),
-        wayfinder(),
         vue({
             template: {
                 transformAssetUrls: {
@@ -21,6 +20,7 @@ export default defineConfig({
                 },
             },
         }),
+        wayfinder(),
     ],
     resolve: {
         alias: {

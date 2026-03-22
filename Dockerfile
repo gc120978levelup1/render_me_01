@@ -42,9 +42,9 @@ RUN php artisan storage:link
 # copy apache settings for Laravel Hosting
 COPY 000-default.conf /etc/apache2/sites-enabled/
 
-# uncomment during production
-RUN echo "Listen 0.0.0.0:80" >> /etc/apache2/apache2.conf
-RUN php artisan migrate --force
+# UNCOMMENT CODE BELOW DURING PRODUCTION DEPLOYMENT
+# RUN php artisan migrate --force
+# RUN echo "Listen 0.0.0.0:80" >> /etc/apache2/apache2.conf
 
 # Enable Apache Web Service
 RUN a2enmod rewrite
@@ -52,4 +52,4 @@ RUN apachectl restart
 RUN chown -R root:root storage bootstrap/cache
 RUN chmod -R 777 storage bootstrap/cache
 
-EXPOSE 80 445
+EXPOSE 80
